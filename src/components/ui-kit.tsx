@@ -181,3 +181,15 @@ export function NoAccess() {
     />
   );
 }
+
+export function ComingSoon({ title }: { title: string }) {
+  return (
+    <div>
+      <PageHeader title={title} />
+      <EmptyState
+        title="This section is still being built"
+        description="It will be finished in the next round of work."
+      />
+    </div>
+  );
+}
