@@ -92,7 +92,10 @@ export function Onboarding() {
       ...(type === "student" && grade ? { _grade_level_id: grade } : {}),
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     toast.success("You're all set!");
     await qc.invalidateQueries({ queryKey: ["me"] });
   }
