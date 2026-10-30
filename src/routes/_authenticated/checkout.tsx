@@ -73,20 +73,24 @@ function Checkout() {
     );
   }
 
+  const p = preview.data;
+  const free = p ? Number(p.total) === 0 : false;
+
   async function pay() {
     if (!studentId) return toast.error("Choose who the course is for");
+    const result = free ? "succeeded" : outcome;
     setBusy(true);
     const { data, error } = await supabase.rpc("simulate_checkout", {
       _student_id: studentId,
       ...(courseId ? { _course_id: courseId } : {}),
       ...(planId ? { _plan_id: planId } : {}),
       ...(applied ? { _coupon: applied } : {}),
-      _outcome: outcome,
+      _outcome: result,
     });
     setBusy(false);
     if (error) return toast.error(error.message);
     await qc.invalidateQueries();
-    if (outcome === "failed") {
+    if (result === "failed") {
       toast.error("The payment was declined. No charge was made — try again.");
       return;
     }
@@ -95,9 +99,6 @@ function Checkout() {
     else if (studentId === me.id) navigate({ to: "/learn" });
     else navigate({ to: "/payments", search: { highlight: data ?? undefined } });
   }
-
-  const p = preview.data;
-  const free = p ? Number(p.total) === 0 : false;
 
   return (
     <div>
