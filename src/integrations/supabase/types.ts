@@ -1363,6 +1363,14 @@ export type Database = {
       is_parent_of: { Args: { _student: string }; Returns: boolean }
       is_platform_admin: { Args: never; Returns: boolean }
       is_published_course: { Args: { _course: string }; Returns: boolean }
+      message_contacts: {
+        Args: never
+        Returns: {
+          full_name: string
+          id: string
+          roles: string[]
+        }[]
+      }
       preview_checkout: {
         Args: { _coupon?: string; _course_id?: string; _plan_id?: string }
         Returns: Json

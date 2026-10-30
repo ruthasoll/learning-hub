@@ -8,6 +8,13 @@
       "when": 1793190374468,
       "tag": "0000_lms_core_schema",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793340412875,
+      "tag": "0001_message_contacts",
+      "breakpoints": true
     }
   ]
 }
