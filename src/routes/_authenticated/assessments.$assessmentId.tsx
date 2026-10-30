@@ -30,11 +30,13 @@ function AssessmentPage() {
   const q = useQuery({
     queryKey: ["assessment", assessmentId, me.id],
     queryFn: async () => {
-      const a = unwrap(await supabase.from("assessments").select("*, courses(id, title)").eq("id", assessmentId).maybeSingle());
+      const aRes = await supabase.from("assessments").select("*, courses(id, title)").eq("id", assessmentId).maybeSingle();
+      if (aRes.error) throw new Error(aRes.error.message);
+      const a = aRes.data;
       const questions = unwrap(await supabase.from("questions").select("*").eq("assessment_id", assessmentId).order("position"));
-      const sub = unwrap(
-        await supabase.from("submissions").select("*").eq("assessment_id", assessmentId).eq("student_id", me.id).maybeSingle(),
-      );
+      const subRes = await supabase.from("submissions").select("*").eq("assessment_id", assessmentId).eq("student_id", me.id).maybeSingle();
+      if (subRes.error) throw new Error(subRes.error.message);
+      const sub = subRes.data;
       const ans = sub ? unwrap(await supabase.from("answers").select("*").eq("submission_id", sub.id)) : [];
       return { a, questions, sub, ans };
     },
@@ -56,7 +58,10 @@ function AssessmentPage() {
     setBusy(true);
     const { error } = await supabase.rpc("submit_assessment", { _assessment_id: assessmentId, _answers: answers });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     toast.success("Submitted!");
     await qc.invalidateQueries({ queryKey: ["assessment", assessmentId] });
     await qc.invalidateQueries({ queryKey: ["student-overview"] });
