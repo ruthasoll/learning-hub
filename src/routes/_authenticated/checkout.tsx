@@ -77,7 +77,10 @@ function Checkout() {
   const free = p ? Number(p.total) === 0 : false;
 
   async function pay() {
-    if (!studentId) return toast.error("Choose who the course is for");
+    if (!studentId) {
+      toast.error("Choose who the course is for");
+      return;
+    }
     const result = free ? "succeeded" : outcome;
     setBusy(true);
     const { data, error } = await supabase.rpc("simulate_checkout", {
@@ -88,7 +91,10 @@ function Checkout() {
       _outcome: result,
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     await qc.invalidateQueries();
     if (result === "failed") {
       toast.error("The payment was declined. No charge was made — try again.");
