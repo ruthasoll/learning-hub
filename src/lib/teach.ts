@@ -1,18 +1,21 @@
 import { queryOptions } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { unwrap } from "@/lib/session";
+import { unwrap, type Tables } from "@/lib/session";
 
 export function teachCourseQuery(courseId: string) {
   return queryOptions({
     queryKey: ["teach-course", courseId],
-    queryFn: async () =>
-      unwrap(
-        await supabase
-          .from("courses")
-          .select("*, subjects(name), grade_levels(name), instructor:profiles!courses_instructor_id_fkey(id, full_name)")
-          .eq("id", courseId)
-          .maybeSingle(),
-      ),
+    queryFn: async () => {
+      const res = await supabase
+        .from("courses")
+        .select("*, subjects(name), grade_levels(name)")
+        .eq("id", courseId)
+        .maybeSingle();
+      if (res.error) throw new Error(res.error.message);
+      return res.data as
+        | (Tables<"courses"> & { subjects: { name: string } | null; grade_levels: { name: string } | null })
+        | null;
+    },
   });
 }
 

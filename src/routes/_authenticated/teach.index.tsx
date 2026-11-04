@@ -82,7 +82,7 @@ function TeachHome() {
       <div className="mb-8 grid gap-4 sm:grid-cols-3">
         <StatCard label="Courses" value={list.length} hint={`${list.filter((c) => c.status === "published").length} published`} icon={<BookOpen className="size-5" />} />
         <StatCard label="Students" value={students} icon={<Users className="size-5" />} tone="teal" />
-        <StatCard label="Waiting to be graded" value={pendingGrading.data ?? 0} tone="sun" hint={<Link to="/teach/grading" className="underline">Open grading</Link>} />
+        <StatCard label="Waiting to be graded" value={pendingGrading.data ?? 0} tone="sun" hint="Written answers from your students" />
       </div>
 
       {courses.isLoading ? (

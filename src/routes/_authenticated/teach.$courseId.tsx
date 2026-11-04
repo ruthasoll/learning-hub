@@ -31,7 +31,7 @@ function CourseEditor() {
   return (
     <div>
       <Button asChild variant="ghost" size="sm" className="mb-3">
-        <Link to={isAdmin && c.instructor_id !== me.id ? "/admin/reviews" : "/teach"}><ArrowLeft /> Back</Link>
+        <Link to={isAdmin && c.instructor_id !== me.id ? "/admin" : "/teach"}><ArrowLeft /> Back</Link>
       </Button>
       <PageHeader eyebrow={`${c.subjects?.name ?? "Course"} · ${c.grade_levels?.name ?? "No grade"}`} title={c.title} description={COURSE_STATUS_HELP[c.status]} actions={<StatusPill status={c.status} />} />
       {c.status === "rejected" && c.review_comment && (
