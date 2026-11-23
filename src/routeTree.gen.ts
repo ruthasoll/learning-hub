@@ -24,15 +24,24 @@ import { Route as AuthenticatedPaymentsRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as CoursesCourseIdRouteImport } from './routes/courses.$courseId'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedAdminAcademicsRouteImport } from './routes/_authenticated/admin.academics'
+import { Route as AuthenticatedAdminAuditRouteImport } from './routes/_authenticated/admin.audit'
 import { Route as AuthenticatedAdminParentsRouteImport } from './routes/_authenticated/admin.parents'
 import { Route as AuthenticatedAdminReviewsRouteImport } from './routes/_authenticated/admin.reviews'
+import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin.settings'
 import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authenticated/admin.users'
 import { Route as AuthenticatedAssessmentsAssessmentIdRouteImport } from './routes/_authenticated/assessments.$assessmentId'
 import { Route as AuthenticatedFinanceIndexRouteImport } from './routes/_authenticated/finance.index'
+import { Route as AuthenticatedFinanceCouponsRouteImport } from './routes/_authenticated/finance.coupons'
+import { Route as AuthenticatedFinancePricingRouteImport } from './routes/_authenticated/finance.pricing'
+import { Route as AuthenticatedFinanceRefundsRouteImport } from './routes/_authenticated/finance.refunds'
+import { Route as AuthenticatedFinanceTransactionsRouteImport } from './routes/_authenticated/finance.transactions'
 import { Route as AuthenticatedLearnIndexRouteImport } from './routes/_authenticated/learn.index'
 import { Route as AuthenticatedLearnCourseIdRouteImport } from './routes/_authenticated/learn.$courseId'
 import { Route as AuthenticatedTeachIndexRouteImport } from './routes/_authenticated/teach.index'
 import { Route as AuthenticatedTeachCourseIdRouteImport } from './routes/_authenticated/teach.$courseId'
+import { Route as AuthenticatedTeachGradingRouteImport } from './routes/_authenticated/teach.grading'
+import { Route as AuthenticatedTeachStudentsRouteImport } from './routes/_authenticated/teach.students'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -110,6 +119,17 @@ const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminAcademicsRoute =
+  AuthenticatedAdminAcademicsRouteImport.update({
+    id: '/admin/academics',
+    path: '/admin/academics',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminAuditRoute = AuthenticatedAdminAuditRouteImport.update({
+  id: '/admin/audit',
+  path: '/admin/audit',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAdminParentsRoute =
   AuthenticatedAdminParentsRouteImport.update({
     id: '/admin/parents',
@@ -120,6 +140,12 @@ const AuthenticatedAdminReviewsRoute =
   AuthenticatedAdminReviewsRouteImport.update({
     id: '/admin/reviews',
     path: '/admin/reviews',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminSettingsRoute =
+  AuthenticatedAdminSettingsRouteImport.update({
+    id: '/admin/settings',
+    path: '/admin/settings',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedAdminUsersRoute = AuthenticatedAdminUsersRouteImport.update({
@@ -137,6 +163,30 @@ const AuthenticatedFinanceIndexRoute =
   AuthenticatedFinanceIndexRouteImport.update({
     id: '/finance/',
     path: '/finance/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedFinanceCouponsRoute =
+  AuthenticatedFinanceCouponsRouteImport.update({
+    id: '/finance/coupons',
+    path: '/finance/coupons',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedFinancePricingRoute =
+  AuthenticatedFinancePricingRouteImport.update({
+    id: '/finance/pricing',
+    path: '/finance/pricing',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedFinanceRefundsRoute =
+  AuthenticatedFinanceRefundsRouteImport.update({
+    id: '/finance/refunds',
+    path: '/finance/refunds',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedFinanceTransactionsRoute =
+  AuthenticatedFinanceTransactionsRouteImport.update({
+    id: '/finance/transactions',
+    path: '/finance/transactions',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedLearnIndexRoute = AuthenticatedLearnIndexRouteImport.update({
@@ -161,6 +211,18 @@ const AuthenticatedTeachCourseIdRoute =
     path: '/teach/$courseId',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedTeachGradingRoute =
+  AuthenticatedTeachGradingRouteImport.update({
+    id: '/teach/grading',
+    path: '/teach/grading',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedTeachStudentsRoute =
+  AuthenticatedTeachStudentsRouteImport.update({
+    id: '/teach/students',
+    path: '/teach/students',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -176,12 +238,21 @@ export interface FileRoutesByFullPath {
   '/payments': typeof AuthenticatedPaymentsRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/courses/$courseId': typeof CoursesCourseIdRoute
+  '/admin/academics': typeof AuthenticatedAdminAcademicsRoute
+  '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/parents': typeof AuthenticatedAdminParentsRoute
   '/admin/reviews': typeof AuthenticatedAdminReviewsRoute
+  '/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/assessments/$assessmentId': typeof AuthenticatedAssessmentsAssessmentIdRoute
+  '/finance/coupons': typeof AuthenticatedFinanceCouponsRoute
+  '/finance/pricing': typeof AuthenticatedFinancePricingRoute
+  '/finance/refunds': typeof AuthenticatedFinanceRefundsRoute
+  '/finance/transactions': typeof AuthenticatedFinanceTransactionsRoute
   '/learn/$courseId': typeof AuthenticatedLearnCourseIdRoute
   '/teach/$courseId': typeof AuthenticatedTeachCourseIdRoute
+  '/teach/grading': typeof AuthenticatedTeachGradingRoute
+  '/teach/students': typeof AuthenticatedTeachStudentsRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/finance/': typeof AuthenticatedFinanceIndexRoute
   '/learn/': typeof AuthenticatedLearnIndexRoute
@@ -201,12 +272,21 @@ export interface FileRoutesByTo {
   '/payments': typeof AuthenticatedPaymentsRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/courses/$courseId': typeof CoursesCourseIdRoute
+  '/admin/academics': typeof AuthenticatedAdminAcademicsRoute
+  '/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/admin/parents': typeof AuthenticatedAdminParentsRoute
   '/admin/reviews': typeof AuthenticatedAdminReviewsRoute
+  '/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/assessments/$assessmentId': typeof AuthenticatedAssessmentsAssessmentIdRoute
+  '/finance/coupons': typeof AuthenticatedFinanceCouponsRoute
+  '/finance/pricing': typeof AuthenticatedFinancePricingRoute
+  '/finance/refunds': typeof AuthenticatedFinanceRefundsRoute
+  '/finance/transactions': typeof AuthenticatedFinanceTransactionsRoute
   '/learn/$courseId': typeof AuthenticatedLearnCourseIdRoute
   '/teach/$courseId': typeof AuthenticatedTeachCourseIdRoute
+  '/teach/grading': typeof AuthenticatedTeachGradingRoute
+  '/teach/students': typeof AuthenticatedTeachStudentsRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/finance': typeof AuthenticatedFinanceIndexRoute
   '/learn': typeof AuthenticatedLearnIndexRoute
@@ -228,12 +308,21 @@ export interface FileRoutesById {
   '/_authenticated/payments': typeof AuthenticatedPaymentsRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/courses/$courseId': typeof CoursesCourseIdRoute
+  '/_authenticated/admin/academics': typeof AuthenticatedAdminAcademicsRoute
+  '/_authenticated/admin/audit': typeof AuthenticatedAdminAuditRoute
   '/_authenticated/admin/parents': typeof AuthenticatedAdminParentsRoute
   '/_authenticated/admin/reviews': typeof AuthenticatedAdminReviewsRoute
+  '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/_authenticated/admin/users': typeof AuthenticatedAdminUsersRoute
   '/_authenticated/assessments/$assessmentId': typeof AuthenticatedAssessmentsAssessmentIdRoute
+  '/_authenticated/finance/coupons': typeof AuthenticatedFinanceCouponsRoute
+  '/_authenticated/finance/pricing': typeof AuthenticatedFinancePricingRoute
+  '/_authenticated/finance/refunds': typeof AuthenticatedFinanceRefundsRoute
+  '/_authenticated/finance/transactions': typeof AuthenticatedFinanceTransactionsRoute
   '/_authenticated/learn/$courseId': typeof AuthenticatedLearnCourseIdRoute
   '/_authenticated/teach/$courseId': typeof AuthenticatedTeachCourseIdRoute
+  '/_authenticated/teach/grading': typeof AuthenticatedTeachGradingRoute
+  '/_authenticated/teach/students': typeof AuthenticatedTeachStudentsRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/_authenticated/finance/': typeof AuthenticatedFinanceIndexRoute
   '/_authenticated/learn/': typeof AuthenticatedLearnIndexRoute
@@ -255,12 +344,21 @@ export interface FileRouteTypes {
     | '/payments'
     | '/profile'
     | '/courses/$courseId'
+    | '/admin/academics'
+    | '/admin/audit'
     | '/admin/parents'
     | '/admin/reviews'
+    | '/admin/settings'
     | '/admin/users'
     | '/assessments/$assessmentId'
+    | '/finance/coupons'
+    | '/finance/pricing'
+    | '/finance/refunds'
+    | '/finance/transactions'
     | '/learn/$courseId'
     | '/teach/$courseId'
+    | '/teach/grading'
+    | '/teach/students'
     | '/admin/'
     | '/finance/'
     | '/learn/'
@@ -280,12 +378,21 @@ export interface FileRouteTypes {
     | '/payments'
     | '/profile'
     | '/courses/$courseId'
+    | '/admin/academics'
+    | '/admin/audit'
     | '/admin/parents'
     | '/admin/reviews'
+    | '/admin/settings'
     | '/admin/users'
     | '/assessments/$assessmentId'
+    | '/finance/coupons'
+    | '/finance/pricing'
+    | '/finance/refunds'
+    | '/finance/transactions'
     | '/learn/$courseId'
     | '/teach/$courseId'
+    | '/teach/grading'
+    | '/teach/students'
     | '/admin'
     | '/finance'
     | '/learn'
@@ -306,12 +413,21 @@ export interface FileRouteTypes {
     | '/_authenticated/payments'
     | '/_authenticated/profile'
     | '/courses/$courseId'
+    | '/_authenticated/admin/academics'
+    | '/_authenticated/admin/audit'
     | '/_authenticated/admin/parents'
     | '/_authenticated/admin/reviews'
+    | '/_authenticated/admin/settings'
     | '/_authenticated/admin/users'
     | '/_authenticated/assessments/$assessmentId'
+    | '/_authenticated/finance/coupons'
+    | '/_authenticated/finance/pricing'
+    | '/_authenticated/finance/refunds'
+    | '/_authenticated/finance/transactions'
     | '/_authenticated/learn/$courseId'
     | '/_authenticated/teach/$courseId'
+    | '/_authenticated/teach/grading'
+    | '/_authenticated/teach/students'
     | '/_authenticated/admin/'
     | '/_authenticated/finance/'
     | '/_authenticated/learn/'
@@ -434,6 +550,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/academics': {
+      id: '/_authenticated/admin/academics'
+      path: '/admin/academics'
+      fullPath: '/admin/academics'
+      preLoaderRoute: typeof AuthenticatedAdminAcademicsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/audit': {
+      id: '/_authenticated/admin/audit'
+      path: '/admin/audit'
+      fullPath: '/admin/audit'
+      preLoaderRoute: typeof AuthenticatedAdminAuditRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/parents': {
       id: '/_authenticated/admin/parents'
       path: '/admin/parents'
@@ -446,6 +576,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/reviews'
       fullPath: '/admin/reviews'
       preLoaderRoute: typeof AuthenticatedAdminReviewsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/settings': {
+      id: '/_authenticated/admin/settings'
+      path: '/admin/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AuthenticatedAdminSettingsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/admin/users': {
@@ -467,6 +604,34 @@ declare module '@tanstack/react-router' {
       path: '/finance'
       fullPath: '/finance/'
       preLoaderRoute: typeof AuthenticatedFinanceIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/finance/coupons': {
+      id: '/_authenticated/finance/coupons'
+      path: '/finance/coupons'
+      fullPath: '/finance/coupons'
+      preLoaderRoute: typeof AuthenticatedFinanceCouponsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/finance/pricing': {
+      id: '/_authenticated/finance/pricing'
+      path: '/finance/pricing'
+      fullPath: '/finance/pricing'
+      preLoaderRoute: typeof AuthenticatedFinancePricingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/finance/refunds': {
+      id: '/_authenticated/finance/refunds'
+      path: '/finance/refunds'
+      fullPath: '/finance/refunds'
+      preLoaderRoute: typeof AuthenticatedFinanceRefundsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/finance/transactions': {
+      id: '/_authenticated/finance/transactions'
+      path: '/finance/transactions'
+      fullPath: '/finance/transactions'
+      preLoaderRoute: typeof AuthenticatedFinanceTransactionsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/learn/': {
@@ -497,6 +662,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTeachCourseIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/teach/grading': {
+      id: '/_authenticated/teach/grading'
+      path: '/teach/grading'
+      fullPath: '/teach/grading'
+      preLoaderRoute: typeof AuthenticatedTeachGradingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/teach/students': {
+      id: '/_authenticated/teach/students'
+      path: '/teach/students'
+      fullPath: '/teach/students'
+      preLoaderRoute: typeof AuthenticatedTeachStudentsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -509,12 +688,21 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedNotificationsRoute: typeof AuthenticatedNotificationsRoute
   AuthenticatedPaymentsRoute: typeof AuthenticatedPaymentsRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedAdminAcademicsRoute: typeof AuthenticatedAdminAcademicsRoute
+  AuthenticatedAdminAuditRoute: typeof AuthenticatedAdminAuditRoute
   AuthenticatedAdminParentsRoute: typeof AuthenticatedAdminParentsRoute
   AuthenticatedAdminReviewsRoute: typeof AuthenticatedAdminReviewsRoute
+  AuthenticatedAdminSettingsRoute: typeof AuthenticatedAdminSettingsRoute
   AuthenticatedAdminUsersRoute: typeof AuthenticatedAdminUsersRoute
   AuthenticatedAssessmentsAssessmentIdRoute: typeof AuthenticatedAssessmentsAssessmentIdRoute
+  AuthenticatedFinanceCouponsRoute: typeof AuthenticatedFinanceCouponsRoute
+  AuthenticatedFinancePricingRoute: typeof AuthenticatedFinancePricingRoute
+  AuthenticatedFinanceRefundsRoute: typeof AuthenticatedFinanceRefundsRoute
+  AuthenticatedFinanceTransactionsRoute: typeof AuthenticatedFinanceTransactionsRoute
   AuthenticatedLearnCourseIdRoute: typeof AuthenticatedLearnCourseIdRoute
   AuthenticatedTeachCourseIdRoute: typeof AuthenticatedTeachCourseIdRoute
+  AuthenticatedTeachGradingRoute: typeof AuthenticatedTeachGradingRoute
+  AuthenticatedTeachStudentsRoute: typeof AuthenticatedTeachStudentsRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
   AuthenticatedFinanceIndexRoute: typeof AuthenticatedFinanceIndexRoute
   AuthenticatedLearnIndexRoute: typeof AuthenticatedLearnIndexRoute
@@ -530,13 +718,22 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedNotificationsRoute: AuthenticatedNotificationsRoute,
   AuthenticatedPaymentsRoute: AuthenticatedPaymentsRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedAdminAcademicsRoute: AuthenticatedAdminAcademicsRoute,
+  AuthenticatedAdminAuditRoute: AuthenticatedAdminAuditRoute,
   AuthenticatedAdminParentsRoute: AuthenticatedAdminParentsRoute,
   AuthenticatedAdminReviewsRoute: AuthenticatedAdminReviewsRoute,
+  AuthenticatedAdminSettingsRoute: AuthenticatedAdminSettingsRoute,
   AuthenticatedAdminUsersRoute: AuthenticatedAdminUsersRoute,
   AuthenticatedAssessmentsAssessmentIdRoute:
     AuthenticatedAssessmentsAssessmentIdRoute,
+  AuthenticatedFinanceCouponsRoute: AuthenticatedFinanceCouponsRoute,
+  AuthenticatedFinancePricingRoute: AuthenticatedFinancePricingRoute,
+  AuthenticatedFinanceRefundsRoute: AuthenticatedFinanceRefundsRoute,
+  AuthenticatedFinanceTransactionsRoute: AuthenticatedFinanceTransactionsRoute,
   AuthenticatedLearnCourseIdRoute: AuthenticatedLearnCourseIdRoute,
   AuthenticatedTeachCourseIdRoute: AuthenticatedTeachCourseIdRoute,
+  AuthenticatedTeachGradingRoute: AuthenticatedTeachGradingRoute,
+  AuthenticatedTeachStudentsRoute: AuthenticatedTeachStudentsRoute,
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
   AuthenticatedFinanceIndexRoute: AuthenticatedFinanceIndexRoute,
   AuthenticatedLearnIndexRoute: AuthenticatedLearnIndexRoute,
