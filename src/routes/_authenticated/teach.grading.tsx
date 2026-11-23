@@ -98,7 +98,7 @@ function GradeDialog({ id, onClose }: { id: string; onClose: (saved: boolean) =>
   async function save() {
     const written = (data.data?.answers ?? []).filter((a) => a.questions?.kind === "written");
     const grades = written.map((a) => ({ answer_id: a.id, marks: Number(marks[a.id] ?? a.marks_awarded ?? 0), feedback: fb[a.id] ?? a.feedback ?? "" }));
-    const ok = await act(supabase.rpc("grade_submission", { _submission_id: id, _grades: grades, _feedback: overall ?? data.data?.sub.feedback ?? "" }), "Grade saved and student notified");
+    const ok = await act(supabase.rpc("grade_submission", { _submission_id: id, _grades: grades, _feedback: overall ?? data.data?.sub?.feedback ?? "" }), "Grade saved and student notified");
     if (ok) onClose(true);
   }
 
@@ -125,7 +125,7 @@ function GradeDialog({ id, onClose }: { id: string; onClose: (saved: boolean) =>
                 )}
               </div>
             ))}
-            <Textarea rows={3} placeholder="Overall feedback for the student" value={overall ?? data.data.sub.feedback ?? ""} onChange={(e) => setOverall(e.target.value)} />
+            <Textarea rows={3} placeholder="Overall feedback for the student" value={overall ?? data.data.sub?.feedback ?? ""} onChange={(e) => setOverall(e.target.value)} />
           </div>
         )}
         <DialogFooter><Button onClick={save}>Save grade</Button></DialogFooter>
