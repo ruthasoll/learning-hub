@@ -85,7 +85,8 @@ function GradeDialog({ id, onClose }: { id: string; onClose: (saved: boolean) =>
   const data = useQuery({
     queryKey: ["grade-sub", id],
     queryFn: async () => {
-      const sub = unwrap(await supabase.from("submissions").select("*").eq("id", id).single());
+      const subRes = await supabase.from("submissions").select("*").eq("id", id).single();
+      const sub = unwrap(subRes);
       const answers = unwrap(await supabase.from("answers").select("*, questions(prompt, kind, marks, rubric, position)").eq("submission_id", id));
       answers.sort((a, b) => (a.questions?.position ?? 0) - (b.questions?.position ?? 0));
       return { sub, answers };
