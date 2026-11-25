@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep transaction filtering in a browser-safe pure finance module with focused tests, so on-screen records and exported reports use identical search rules.
